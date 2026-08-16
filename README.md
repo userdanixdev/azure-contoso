@@ -16,7 +16,7 @@
 ## Estrutura Inicial do Projeto ContosoRetailDW no Azure 
 
 
-### Visão geral
+### Visão geral:
 ---
 O ponto de partida do projeto é um backup SQL Server no formato:
 
@@ -133,27 +133,7 @@ O arquivo `.env` deve estar no `.gitignore` e **nunca deve ser enviado ao GitHub
 
 ---
 
-## Validação das dependências Python
-
-As bibliotecas instaladas no ambiente Conda.
-O ambiente deve conter, entre outras dependências do projeto:
-
-```text
-pyodbc
-azure-identity
-```
-
-O arquivo `environment.yml` deve ser atualizado após alterações nas dependências:
-
-```bash
-conda env export --from-history > environment.yml
-```
-
-***O arquivo deve ser versionado no Git.***
-
----
-
-## Dependências do projeto
+## Visão Geral do projeto:
 
 A infraestrutura do projeto está dividida em 2 camadas principais: **ambiente local/python**  e **recursos do Azure**.
 
@@ -163,12 +143,12 @@ Projeto Contoso Retail Analytics
 ├── Ambiente local
 │   ├── Windows
 │   └── Microsoft ODBC Driver 18 for SQL Server
-|   └──  Conda
-|          └── azure-contoso
-|          ├── Python 3.12
-|          ├── pyodbc
-|          ├── azure-identity
-|          └── python-dotenv
+|   └── Conda
+|         └── azure-contoso
+|         ├── Python 3.12
+|         ├── pyodbc
+|         ├── azure-identity
+|         └── python-dotenv
 │
 └── Microsoft Azure
     │
@@ -209,11 +189,6 @@ Projeto Contoso Retail Analytics
                     Power BI
 ```
 
-### Ambiente local
-
-O desenvolvimento e a administração do projeto são realizados a partir de uma máquina Windows.
-
-
 ### Ambiente Python Isolado:
 
 O projeto utiliza um ambiente isolado criado com **Conda**, denominado `azure-contoso`.
@@ -226,7 +201,7 @@ Principais dependências:
 | **pyodbc**         | Conexão Python com SQL Server/Azure SQL                      |
 | **azure-identity** | Autenticação utilizando Microsoft Entra ID                   |
 | **python-dotenv**  | Carregamento de variáveis de ambiente a partir do `.env`     |
-
+| **Pandas**  | Visualização e análise das tabelas
 ### Microsoft Entra ID
 
 O **Microsoft Entra ID** é utilizado como mecanismo de identidade e autenticação.
@@ -270,7 +245,7 @@ Azure Blob Storage
 Azure SQL Managed Instance
         │
         ▼
-ContosoRetailDW
+  ContosoRetailDW
 ```
 
 ### Azure SQL Logical Server
@@ -380,7 +355,7 @@ CREATE CREDENTIAL
 WITH IDENTITY = 'MANAGED IDENTITY';
 ```
 
-## Problema encontrado:
+## Problema encontrado durante o desenvolvimento
 
 Inicialmente, o acesso ao backup retornava:
 
@@ -402,7 +377,7 @@ Default action: Deny
 
 A configuração de rede do Storage Account foi alterada para permitir o acesso necessário pela rede pública. Após a alteração, a Managed Instance conseguiu acessar o arquivo .bak.
 
-## Validação do backup
+## Validação do backup:
 
 Foi utilizado:
 ```SQL
@@ -447,25 +422,6 @@ Estado: ONLINE
 
 A autenticação utiliza `InteractiveBrowserCredential` e `Microsoft Entra ID.`
 
-## Estrutura Python
-
-Foi criada uma estrutura para separar conexão e consultas:
-
-```
-azure-contoso-analytics/
-│
-├── database/
-│   ├── connection.py
-│   └── queries.py
-│
-├── tests_contoso/
-│   ├── restore_contoso.py
-│   └── restore_contoso_test.py
-│
-├── .env
-└── .gitignore
-```
-
 ## Arquivo de conexão:
 
 O arquivo `database/connection.py` é responsável por:
@@ -490,25 +446,10 @@ WHERE TABLE_TYPE = 'BASE TABLE'
 ORDER BY TABLE_SCHEMA, TABLE_NAME;
 ```
 
-## Recuperação do banco
+*O arquivo `ContosoRetailDW.bak` permanece armazenado no Azure Blob Storage. Isso fornece uma cópia de recuperação independente do banco que está atualmente na Managed Instance.*
 
-O arquivo `ContosoRetailDW.bak` permanece armazenado no Azure Blob Storage.
 
-Isso fornece uma cópia de recuperação independente do banco que está atualmente na Managed Instance.
 
-Caso seja necessário reconstruir a infraestrutura:
-
-```
-ContosoRetailDW.bak
-        ↓
-Azure Blob Storage
-        ↓
-Nova Managed Instance
-        ↓
-RESTORE DATABASE
-        ↓
-ContosoRetailDW
-```
 
 ## Fluxo Geral:
 
@@ -564,7 +505,7 @@ ContosoRetailDW
 ```
 
 
-## Stack do projeto:
+## Stack utilizada:
 
 - ☁️ Microsoft Azure - infraestrutura em nuvem
 - 🗄️ Azure SQL Managed Instance - ambiente de banco de dados

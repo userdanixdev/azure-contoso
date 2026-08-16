@@ -510,12 +510,7 @@ RESTORE DATABASE
 ContosoRetailDW
 ```
 
-## Próximos passos
-
-- Criar consultas SQL para explorar o ContosoRetailDW.
-- Mapear tabelas e relacionamentos.
-- Integrar posteriormente os dados com Power BI.
-
+## Fluxo Geral:
 
 ```
 
@@ -632,13 +627,13 @@ Utilize o conector de Banco de Dados SQL do Azure (evite o conector genérico de
 
 Para mais detalhes técnicos, histórico do problema e discussões de contorno, acesse a Issue gerada no repositório.
 
-https://github.com/userdanixdev/azure-contoso/issues/1
+[Issue #1 Gerada - Clique Aqui](https://github.com/userdanixdev/azure-contoso/issues/1)
 
 ## 👨‍💻 Autoria:
 
 **👤 Autor:** `Daniel Martins França` 
 
-[GitHub](https://github.com/userdanixdev) - Siga-me no GitHub!
+**🔗 GitHub:** [Siga-me no GitHub!](https://github.com/userdanixdev) 
 
 **🔗 LinkedIn:** [Acesse a minha página!](https://www.linkedin.com/in/danixdev)
 

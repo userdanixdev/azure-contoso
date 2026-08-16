@@ -77,10 +77,9 @@ print("Conexão realizada com sucesso!")
 print(f"Banco: {DATABASE}")
 print()
 
-
+# Consultas:
 # Cria o cursor
 cursor = connection.cursor()
-
 
 # Consulta as tabelas existentes
 cursor.execute(

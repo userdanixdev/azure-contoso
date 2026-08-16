@@ -6,34 +6,29 @@ from azure.identity import InteractiveBrowserCredential
 from dotenv import load_dotenv
 
 
-# ============================================================
-# 1. Carrega variáveis do .env
-# ============================================================
+# Carrega variáveis do .env:
 
 load_dotenv()
 
 ID_LOCATARIO = os.getenv("ID_LOCATARIO")
+SERVER = os.getenv("AZURE_SQL_MI_SERVER")
+DATABASE = os.getenv("AZURE_SQL_MI_DATABASE")
 
 if not ID_LOCATARIO:
     raise ValueError(
         "ID_LOCATARIO não foi encontrado no arquivo .env"
     )
 
+if not SERVER:
+    raise ValueError(
+        "AZURE_SQL_MI_SERVER não foi encontrado no arquivo .env"
+    )
 
-# ============================================================
-# 2. Configurações
-# ============================================================
+if not DATABASE:
+    raise ValueError(
+        "AZURE_SQL_MI_DATABASE não foi encontrado no arquivo .env"
+    )
 
-SERVER = (
-    "mi-contoso-retail.public.b018dfd06a8a.database.windows.net,3342"
-)
-
-DATABASE = "ContosoRetailDW"
-
-
-# ============================================================
-# 3. Autenticação Microsoft Entra ID
-# ============================================================
 
 credential = InteractiveBrowserCredential(
     tenant_id=ID_LOCATARIO
@@ -51,17 +46,10 @@ token_struct = struct.pack(
     token_bytes,
 )
 
-
-# ============================================================
-# 4. Constante ODBC
-# ============================================================
-
+# Constante ODBC
 SQL_COPT_SS_ACCESS_TOKEN = 1256
 
-
-# ============================================================
-# 5. String de conexão
-# ============================================================
+# String de conexão
 
 connection_string = (
     "DRIVER={ODBC Driver 18 for SQL Server};"
@@ -71,10 +59,7 @@ connection_string = (
     "TrustServerCertificate=no;"
 )
 
-
-# ============================================================
-# 6. Função de conexão
-# ============================================================
+# Função de conexão:
 
 def get_connection():
 

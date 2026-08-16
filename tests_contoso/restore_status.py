@@ -5,9 +5,29 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-SERVER = os.getenv("AZURE_SQL_SERVER_1")
+SERVER = os.getenv("AZURE_SQL_MI_SERVER")
 ID_LOCATARIO = os.getenv("ID_LOCATARIO")
-DATABASE = "master"
+DATABASE = os.getenv("AZURE_SQL_MI_DATABASE")
+# Valida configurações
+
+if not SERVER:
+    raise ValueError(
+        "AZURE_SQL_MI_SERVER não foi encontrado no arquivo .env"
+    )
+
+if not DATABASE:
+    raise ValueError(
+        "AZURE_SQL_MI_DATABASE não foi encontrado no arquivo .env"
+    )
+
+if not ID_LOCATARIO:
+    raise ValueError(
+        "ID_LOCATARIO não foi encontrado no arquivo .env"
+    )
+
+# Autenticação Microsoft Entra ID:
+
+# Variávels dinâmincas, não irão para o .env:
 
 credential = InteractiveBrowserCredential(
     tenant_id=ID_LOCATARIO
@@ -21,13 +41,7 @@ token = credential.get_token(
 
 print(" Autenticação concluída.")
 
-connection_string = (
-    "DRIVER={ODBC Driver 18 for SQL Server};"
-    f"SERVER={SERVER};"
-    f"DATABASE={DATABASE};"
-    "Encrypt=yes;"
-    "TrustServerCertificate=no;"
-)
+# Converte o Access Token para o formato esperado pelo ODBC:
 
 # Token para o driver ODBC
 token_bytes = token.token.encode("utf-16-le")
@@ -36,16 +50,29 @@ token_struct = (
     + token_bytes
 )
 
+# String de conexão:
+connection_string = (
+    "DRIVER={ODBC Driver 18 for SQL Server};"
+    f"SERVER={SERVER};"
+    f"DATABASE={DATABASE};"
+    "Encrypt=yes;"
+    "TrustServerCertificate=no;"
+)
+
 SQL_COPT_SS_ACCESS_TOKEN = 1256
 
+# Conexão à Managed Instance:
+print("Conectando à Azure SQL Managed Instance...")
 conn = pyodbc.connect(
     connection_string,
     attrs_before={
         SQL_COPT_SS_ACCESS_TOKEN: token_struct
     }
 )
-
+print("Conexão realizada com sucesso!")
+print()
 cursor = conn.cursor()
+# Consulta o status dos RESTOREs em execução
 
 query = """
 SELECT
@@ -66,6 +93,8 @@ cursor.execute(query)
 
 rows = cursor.fetchall()
 
+# Exibir os resultados:
+
 if not rows:
     print("\n Nenhum RESTORE está sendo executado neste momento.")
 else:
@@ -83,5 +112,8 @@ else:
         print(f"Wait time:               {row.segundos_esperando:.2f} s")
         print("-" * 50)
 
+# Fechar a sessão:
 cursor.close()
 conn.close()
+print()
+print("Conexão encerrada.")

@@ -1,9 +1,8 @@
 from connection import get_connection
 
 
-# ============================================================
 # Consulta: listar tabelas
-# ============================================================
+
 
 def listar_tabelas():
 
@@ -11,7 +10,7 @@ def listar_tabelas():
     cursor = connection.cursor()
 
     print()
-    print("Tabelas do banco:")
+    print("Tabelas do banco ContosoRetailDW")
     print()
 
     cursor.execute("""
@@ -31,10 +30,6 @@ def listar_tabelas():
     cursor.close()
     connection.close()
 
-
-# ============================================================
 # Execução
-# ============================================================
-
 if __name__ == "__main__":
     listar_tabelas()

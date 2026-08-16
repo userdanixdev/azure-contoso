@@ -1,4 +1,4 @@
-## Validação do Drive:
+## Validação do Drive instalado no sistema:
 
 import pyodbc
 

@@ -606,15 +606,15 @@ AZURE-CONTOSO-ANALYTICS/
 └── README.md
 ```
 
-## ⚠️ Solução de Problemas: Conexão com o Power BI
+## ⚠️ Problema: Conexão com o Power BI
 Se você encontrar o erro abaixo ao tentar conectar o Power BI à instância gerenciada (Azure SQL Managed Instance) através do endpoint público na porta XXXX:
 
 ```Microsoft SQL: The target principal name is incorrect. Cannot generate SSPI context.```
 
-## Causa do Problema:
+## Causa:
 Esse erro ocorre porque o Power BI tenta negociar a Autenticação do Windows (Kerberos/SSPI) por padrão ou entra em conflito de credenciais, protocolo este que não é suportado para conexões diretas via endpoint público de uma Azure SQL Managed Instance.
 
-## Como Resolver:
+## Resolução:
 
 Ajuste no Portal do Azure. Se o seu fluxo exige logins tradicionais, certifique-se de desativar a opção restritiva "Dar suporte somente à autenticação do Microsoft Entra" nas configurações de segurança da sua Instância Gerenciada e garanta que a senha do Administrador do Servidor SQL esteja definida.
 

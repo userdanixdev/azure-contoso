@@ -619,11 +619,14 @@ AZURE-CONTOSO-ANALYTICS/
 └── README.md
 ```
 
-**Autor:** `Daniel Martins França`
-
 O projeto `Azure-Contoso-Analytics` tem como objetivo explorar, na prática, uma arquitetura de dados em ambiente Azure, utilizando o banco ContosoRetailDW como conjunto de dados para construção e validação do ambiente.
 
 O foco não está apenas na restauração do banco, mas na compreensão de como os diferentes componentes de uma arquitetura de dados se relacionam, desde o armazenamento do backup até a disponibilização do banco para consultas e futuras aplicações analíticas.
+
+
+**Autor:** `Daniel Martins França`
+**LinkedIn:** [LinkedIn](www.linkedin.com/in/danixdev)
+
 
 
 

@@ -20,6 +20,4 @@ O arquivo `queries.py` é responsável pelas consultas SQL realizadas no banco. 
 O arquivo `init.py` é responsável em transformar o database em um pacote Python.
 Ele permite organizar os módulos da pasta e facilita sua utilização por outros componentes do projeto.
 
-```text
-A pasta database representa, portanto, a camada de acesso ao banco de dados do projeto, enquanto os scripts de restauração (restore_header.py, restore_database.py e restore_status.py) ficam responsáveis pelo processo de migração/restauração do backup.
-```
+*A pasta database representa, portanto, a camada de acesso ao banco de dados do projeto, enquanto os scripts de restauração (restore_header.py, restore_database.py e restore_status.py) ficam responsáveis pelo processo de migração/restauração do backup.*

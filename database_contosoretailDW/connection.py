@@ -6,13 +6,13 @@ from azure.identity import InteractiveBrowserCredential
 from dotenv import load_dotenv
 
 
-# Carrega variáveis do .env:
-
 load_dotenv()
+
 
 ID_LOCATARIO = os.getenv("ID_LOCATARIO")
 SERVER = os.getenv("AZURE_SQL_MI_SERVER")
 DATABASE = os.getenv("AZURE_SQL_MI_DATABASE")
+
 
 if not ID_LOCATARIO:
     raise ValueError(
@@ -30,26 +30,8 @@ if not DATABASE:
     )
 
 
-credential = InteractiveBrowserCredential(
-    tenant_id=ID_LOCATARIO
-)
-
-token = credential.get_token(
-    "https://database.windows.net/.default"
-)
-
-token_bytes = token.token.encode("utf-16-le")
-
-token_struct = struct.pack(
-    f"<I{len(token_bytes)}s",
-    len(token_bytes),
-    token_bytes,
-)
-
-# Constante ODBC
 SQL_COPT_SS_ACCESS_TOKEN = 1256
 
-# String de conexão
 
 connection_string = (
     "DRIVER={ODBC Driver 18 for SQL Server};"
@@ -59,11 +41,26 @@ connection_string = (
     "TrustServerCertificate=no;"
 )
 
-# Função de conexão:
 
 def get_connection():
 
     print("Conectando ao ContosoRetailDW...")
+
+    credential = InteractiveBrowserCredential(
+        tenant_id=ID_LOCATARIO
+    )
+
+    token = credential.get_token(
+        "https://database.windows.net/.default"
+    )
+
+    token_bytes = token.token.encode("utf-16-le")
+
+    token_struct = struct.pack(
+        f"<I{len(token_bytes)}s",
+        len(token_bytes),
+        token_bytes,
+    )
 
     connection = pyodbc.connect(
         connection_string,

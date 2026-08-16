@@ -585,10 +585,6 @@ ContosoRetailDW
 
 ```
 AZURE-CONTOSO-ANALYTICS/
-│
-├── .vscode/
-│   └── settings.json
-│
 ├── database_contosoretailDW/
 │   ├── __pycache__/
 │   ├── __init__.py

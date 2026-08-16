@@ -114,8 +114,7 @@ SELECT
     name,
     credential_identity
 FROM sys.credentials
-WHERE name =
-    '{BLOB_CREDENTIAL}';
+WHERE name = '{BLOB_CREDENTIAL}';
 """)
 
 row = cursor.fetchone()

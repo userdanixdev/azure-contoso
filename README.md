@@ -380,7 +380,7 @@ Foi criada uma credential na Managed Instance:
 
 ```SQL
 CREATE CREDENTIAL
-[https://stcontosoretaildw01.blob.core.windows.net/backups]
+[{BLOB_CREDENTIAL}]
 WITH IDENTITY = 'MANAGED IDENTITY';
 ```
 
@@ -411,8 +411,7 @@ A configuração de rede do Storage Account foi alterada para permitir o acesso 
 Foi utilizado:
 ```SQL
 RESTORE HEADERONLY
-FROM URL =
-'https://stcontosoretaildw01.blob.core.windows.net/backups/ContosoRetailDW.bak';
+FROM URL = [{AZURE_BLOB_BACKUP_URL}];
 ```
 
 - Resultado:
@@ -430,8 +429,7 @@ BackupType: 1
 Foi executado através do Python:
 ```SQL
 RESTORE DATABASE [ContosoRetailDW]
-FROM URL =
-'https://stcontosoretaildw01.blob.core.windows.net/backups/ContosoRetailDW.bak';
+FROM URL = [{AZURE_BLOB_BACKUP_URL}];
 ```
 
 - Validação:
@@ -587,7 +585,45 @@ ContosoRetailDW
 - 🌿 Git - versionamento
 - 🐙 GitHub - hospedagem do código e documentação        
 
-*Obs: Falta estrutura do projeto tipo tree*
+## Estrutura do Projeto:
 
-*Também falta o autor*
+```
+AZURE-CONTOSO-ANALYTICS/
+│
+├── .vscode/
+│   └── settings.json
+│
+├── database_contosoretailDW/
+│   ├── __pycache__/
+│   ├── __init__.py
+│   ├── connection.py
+│   ├── queries.py
+│   └── README.md
+│
+├── restore_contoso/
+│   ├── README.md
+│   ├── restore_contoso_test.py
+│   ├── restore_database.py
+│   └── restore_status.py
+│
+├── test_connection_azure/
+│   ├── connection_2.py
+│   ├── connection.py
+│   ├── list_tables_db.py
+│   ├── query_SQL_test.py
+│   └── README.md
+│
+├── .env
+├── .gitignore
+├── environment.yml
+└── README.md
+```
+
+**Autor:** `Daniel Martins França`
+
+O projeto `Azure-Contoso-Analytics` tem como objetivo explorar, na prática, uma arquitetura de dados em ambiente Azure, utilizando o banco ContosoRetailDW como conjunto de dados para construção e validação do ambiente.
+
+O foco não está apenas na restauração do banco, mas na compreensão de como os diferentes componentes de uma arquitetura de dados se relacionam, desde o armazenamento do backup até a disponibilização do banco para consultas e futuras aplicações analíticas.
+
+
 

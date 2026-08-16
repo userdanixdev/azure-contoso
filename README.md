@@ -102,8 +102,6 @@ As dependências do ambiente devem ser registradas no arquivo:
 environment.yml
 ```
 
----
-
 ## Configuração de acesso ao Azure SQL
 
 Além dos componentes locais, o Azure SQL precisa permitir a conexão do ambiente de origem.
@@ -111,8 +109,6 @@ Além dos componentes locais, o Azure SQL precisa permitir a conexão do ambient
 Neste projeto, o acesso utiliza **Microsoft Entra ID** como mecanismo de autenticação.
 
 > Credenciais, tokens e informações de autenticação não devem ser armazenados no código-fonte ou versionados no Git.
-
----
 
 > O fato de o Azure SQL permitir conexões de serviços do Azure não significa necessariamente que o computador local esteja autorizado. O endereço IP utilizado pelo ambiente de desenvolvimento deve estar configurado nas regras de firewall quando houver conexão direta a partir da máquina local.
 
@@ -186,7 +182,7 @@ Projeto Contoso Retail Analytics
     │   └── Restauração e hospedagem do banco ContosoRetailDW
     │
     └── Azure SQL Logical Server
-        └── Recurso lógico utilizado na configuração do ambiente
+        └── Recurso lógico Azure
 ```
 ## Fluxo Arquitetural do Projeto:
 ```

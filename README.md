@@ -11,7 +11,7 @@
 ![Microsoft ODBC Driver](https://img.shields.io/badge/Microsoft%20ODBC%20Driver%2018-CC2927?logo=microsoftsqlserver&logoColor=white)
 ![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)
 
-# Documentação de Configuração do Projeto: Ambiente Azure + Analytics
+# Documentação de Configuração do Projeto: Ambiente Azure 
 
 ## Estrutura Inicial do Projeto ContosoRetailDW no Azure 
 
